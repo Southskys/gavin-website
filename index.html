@@ -1,44 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gavin Nutshaw Inc.</title>
+    <title>Gavin Cutshaw ❤️</title>
     <style>
-        /* All the previous style definitions. */
-        /* ... */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
 
-        /* Toggle style for light and dark mode images */
-        .top-left-toggle {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background-image: url('light_mode.png'); /* Placeholder for your light mode icon */
-            background-size: cover;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
+        .love-text {
+            text-align: center;
+            font-size: 24px;
+            background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 20px;
+        }
+
+        .slider {
+            position: relative;
+            width: 300px; 
+            height: 300px; 
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 0.5s;
+        }
+
+        .slides img {
+            width: 300px;
+            height: 300px;
+            object-fit: contain;
+        }
+
+        .summary-content {
+            display: none;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            width: 300px;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+
+        .summary-button, .map-button {
+            padding: 10px 15px;
+            background-color: #007BFF;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
             cursor: pointer;
-            z-index: 1000;
+            transition: background-color 0.3s;
         }
 
-        [data-theme="dark"] .top-left-toggle {
-            background-image: url('dark_mode.png'); /* Placeholder for your dark mode icon */
+        .summary-button:hover, .map-button:hover {
+            background-color: #0056b3;
         }
-
-        /* Rest of the styles remain unchanged. */
-        /* ... */
     </style>
 </head>
-<body data-theme="light">
 
-    <div class="top-left-toggle" onclick="toggleMode()"></div>
-    <div class="top-right-logo" onclick="toggleModal('login-modal')"></div>
+<body>
 
+    <!-- The love declaration text -->
     <div class="love-text">
         I love Gavin
     </div>
 
+    <!-- Image slider -->
     <div class="slider">
         <div class="slides">
             <img src="gavintsb.png" alt="Placeholder Image 1">
@@ -49,55 +90,44 @@
         </div>
     </div>
 
+    <!-- Summary button and content -->
     <button class="summary-button" onclick="toggleSummary()">Summary</button>
     <div class="summary-content">
         In a heartbreaking turn of events, Gavin Cutshaw, a brilliantly talented 17-year-old rapper, tragically passed away. Known for his profound lyrical abilities and unique sound, Gavin touched the hearts of many, demonstrating that age is just a number when it comes to artistic depth. While his rapping skills earned him respect from music enthusiasts, it also made him a target for bullying, revealing the cruel paradox of society where exceptional talent can sometimes attract envy and hatred.
-        <!-- Additional summary content here... -->
+
+        In addition to his music, Gavin was also a beloved figure on YouTube, where he showcased his humorous side. Through his videos, he managed to bring laughter and light to hundreds, if not thousands, of his subscribers. His infectious energy and quirky sense of humor was a testament to his ability to switch between the seriousness of his music and the joy of his comedic content.
+
+        However, behind the screens and stages, the weight of bullying bore heavily on his young soul. Despite the smiles, laughter, and beats he shared with the world, Gavin struggled in silence. In a devastating decision, he took his own life, a painful reminder of the unseen scars that many endure. Gavin's untimely passing serves as a stark wake-up call about the profound impacts of bullying and the importance of support and understanding in our communities. The world has lost a bright star, but his legacy will continue to shine in the music he left behind and the smiles he once evoked.
     </div>
 
+    <!-- The map button -->
     <a href="https://www.youtube.com/watch?v=LUrawkJf_MI" target="_blank">
         <button class="map-button">Click Me</button>
     </a>
 
-    <div id="login-modal" class="modal">
-        <span class="modal-close" onclick="toggleModal('login-modal')">&times;</span>
-        <h2>Login</h2>
-        <input type="text" placeholder="Email">
-        <input type="password" placeholder="Password">
-        <button onclick="login()">Login</button>
-        <p>Don't have an account? <span onclick="toggleModals()">Sign Up</span></p>
-    </div>
-
-    <div id="signup-modal" class="modal">
-        <span class="modal-close" onclick="toggleModal('signup-modal')">&times;</span>
-        <h2>Sign Up</h2>
-        <input type="text" placeholder="Full Name">
-        <input type="text" placeholder="Email">
-        <input type="password" placeholder="Password">
-        <button onclick="signUp()">Sign Up</button>
-    </div>
-
+    <!-- JavaScript for the slider, summary, and audio functionality -->
     <script>
-        // Original script functionalities.
-        // ...
-
-        function toggleMode() {
-            var body = document.body;
-            var theme = body.getAttribute('data-theme');
-            var toggle = document.querySelector('.top-left-toggle');
-            
-            if (theme === 'dark') {
-                body.setAttribute('data-theme', 'light');
-                toggle.style.backgroundImage = "url('light_mode.png')";
-            } else {
-                body.setAttribute('data-theme', 'dark');
-                toggle.style.backgroundImage = "url('dark_mode.png')";
-            }
+        let slides = document.querySelector('.slides');
+        let imgCount = slides.children.length;
+        let currentIndex = 0;
+        
+        function slideImages() {
+            currentIndex = (currentIndex + 1) % imgCount;
+            slides.style.transform = `translateX(-${currentIndex * 300}px)`;
         }
 
-        // Additional script functionalities.
-        // ...
+        setInterval(slideImages, 7000);  // Change the image every 7 seconds
 
+        function toggleSummary() {
+            let summaryContent = document.querySelector('.summary-content');
+            if (summaryContent.style.display === "none") {
+                summaryContent.style.display = "block";
+            } else {
+                summaryContent.style.display = "none";
+            }
+        }
     </script>
+
 </body>
+
 </html>
