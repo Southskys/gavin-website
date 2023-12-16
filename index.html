@@ -47,7 +47,8 @@
 
         .summary-content {
             display: none;
-            background-color: white;
+            background-color: black; /* Changed to black */
+            color: white; /* Text color changed to white */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             padding: 10px;
             width: 300px;
@@ -101,11 +102,7 @@
     <!-- Image slider -->
     <div class="slider">
         <div class="slides">
-            <img src="gavintsb.png" alt="Placeholder Image 1">
-            <img src="gavintsb2.jpg" alt="Placeholder Image 2">
-            <img src="gavintsb3.jpg" alt="Placeholder Image 3">
-            <img src="gavintsb3.png" alt="Placeholder Image 4">
-            <img src="gavintsb4.png" alt="Placeholder Image 5">
+            <!-- Image sources... -->
         </div>
     </div>
 
@@ -129,7 +126,7 @@
         <img src="sun-toggle-icon.png" alt="Light Mode" id="theme-icon">
     </button>
 
-    <!-- JavaScript for the slider, summary, and audio functionality -->
+    <!-- JavaScript for the slider, summary, and theme functionality -->
     <script>
         let slides = document.querySelector('.slides');
         let imgCount = slides.children.length;
@@ -144,11 +141,7 @@
 
         function toggleSummary() {
             let summaryContent = document.querySelector('.summary-content');
-            if (summaryContent.style.display === "none") {
-                summaryContent.style.display = "block";
-            } else {
-                summaryContent.style.display = "none";
-            }
+            summaryContent.style.display = summaryContent.style.display === "none" ? "block" : "none";
         }
 
         // JavaScript for theme switching
