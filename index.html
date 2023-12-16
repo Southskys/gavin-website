@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gavin Nutshaw Inc.</title>
+    <title>GavinCutshaw_24</title>
     <style>
         :root {
             --primary-color: #333;
@@ -32,6 +32,23 @@
             transition: background-color 0.3s, color 0.3s;
         }
 
+        .top-left-toggle {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-image: url('light_mode.png'); /* Light mode icon */
+            background-size: cover;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        [data-theme="dark"] .top-left-toggle {
+            background-image: url('dark_mode.png'); /* Dark mode icon */
+        }
+
         .top-right-logo {
             position: absolute;
             top: 20px;
@@ -47,7 +64,7 @@
         .top-right-logo:hover::after {
             content: 'Gavin Nutshaw Inc.';
             position: absolute;
-            top: -30px;
+            top: 60px;
             left: 50%;
             transform: translateX(-50%);
             background-color: var(--primary-color);
@@ -56,14 +73,15 @@
             border-radius: 5px;
             font-size: 14px;
             white-space: nowrap;
+            z-index: 1000;
         }
 
         .love-text {
+            text-align: center;
             font-size: 24px;
-            background: linear-gradient(to left, violet, indigo, blue, green, yellow, orange, red);
+            background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
             -webkit-background-clip: text;
             color: transparent;
-            user-select: none;
             margin-bottom: 20px;
         }
 
@@ -99,7 +117,7 @@
 
         .summary-button, .map-button {
             padding: 10px 15px;
-            background-color: #007BFF;
+            background-color: var(--button-background-color);
             color: #ffffff;
             border: none;
             border-radius: 5px;
@@ -108,14 +126,7 @@
         }
 
         .summary-button:hover, .map-button:hover {
-            background-color: #0056b3;
-        }
-
-        .toggle-mode {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            cursor: pointer;
+            background-color: var(--button-hover-background-color);
         }
 
         .modal {
@@ -142,7 +153,7 @@
 
         .modal button {
             padding: 10px 15px;
-            background-color: #007BFF;
+            background-color: var(--button-background-color);
             color: #ffffff;
             border: none;
             border-radius: 5px;
@@ -153,13 +164,13 @@
             float: right;
             cursor: pointer;
         }
+
     </style>
 </head>
 <body data-theme="light">
 
+    <div class="top-left-toggle" onclick="toggleMode()"></div>
     <div class="top-right-logo" onclick="toggleModal('login-modal')"></div>
-
-    <div class="toggle-mode" onclick="toggleMode()">Toggle Mode</div>
 
     <!-- The love declaration text -->
     <div class="love-text">
@@ -169,11 +180,7 @@
     <!-- Image slider -->
     <div class="slider">
         <div class="slides">
-            <img src="gavintsb.png" alt="Placeholder Image 1">
-            <img src="gavintsb2.jpg" alt="Placeholder Image 2">
-            <img src="gavintsb3.jpg" alt="Placeholder Image 3">
-            <img src="gavintsb3.png" alt="Placeholder Image 4">
-            <img src="gavintsb4.png" alt="Placeholder Image 5">
+            <!-- Images previously provided -->
         </div>
     </div>
 
@@ -184,7 +191,7 @@
     </div>
 
     <!-- The map button -->
-    <a href="https://www.youtube.com/watch?v=LUrawkJf_MI" target="_blank">
+    <a href="https://www.pornhub.com/gayporn" target="_blank">
         <button class="map-button">Click Me</button>
     </a>
 
@@ -209,38 +216,39 @@
     </div>
 
     <script>
+        let currentIndex = 0;
+
         function toggleMode() {
             let body = document.body;
             let theme = body.getAttribute('data-theme');
-            body.setAttribute('data-theme', theme === 'dark' ? 'light' : 'dark');
+            let toggle = document.querySelector('.top-left-toggle');
+            
+            if (theme === 'dark') {
+                body.setAttribute('data-theme', 'light');
+                toggle.style.backgroundImage = "url('light_mode.png')"; // Light mode icon
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                toggle.style.backgroundImage = "url('dark_mode.png')"; // Dark mode icon
+            }
         }
 
         function slideImages() {
             let slides = document.querySelector('.slides');
             let imgCount = slides.children.length;
-            let currentIndex = (currentIndex + 1) % imgCount;
+            currentIndex = (currentIndex + 1) % imgCount;
             slides.style.transform = `translateX(-${currentIndex * 300}px)`;
         }
 
-        setInterval(slideImages, 7000);  // Change the image every 7 seconds
+        setInterval(slideImages, 7000); // Change the image every 7 seconds
 
         function toggleSummary() {
             let summaryContent = document.querySelector('.summary-content');
-            if (summaryContent.style.display === "none") {
-                summaryContent.style.display = "block";
-            } else {
-                summaryContent.style.display = "none";
-            }
+            summaryContent.style.display = summaryContent.style.display === "none" ? "block" : "none";
         }
 
         function toggleModal(modalId) {
             let modal = document.getElementById(modalId);
             modal.style.display = modal.style.display === 'none' ? 'block' : 'none';
-        }
-
-        function toggleModals() {
-            toggleModal('login-modal');
-            toggleModal('signup-modal');
         }
 
         function login() {
@@ -249,6 +257,10 @@
 
         function signUp() {
             // Implement your sign-up logic here
+        }
+        function toggleModals() {
+            toggleModal('login-modal');
+            toggleModal('signup-modal');
         }
     </script>
 </body>
