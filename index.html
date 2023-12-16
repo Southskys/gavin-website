@@ -103,6 +103,17 @@
             background-color: #333; /* Dark mode summary background */
             color: #f5f5f5; /* Dark mode summary text color */
         }
+
+        /* Responsive styles for mobile devices */
+        @media (max-width: 768px) {
+            .slider,
+            .summary-content {
+                width: 90%; /* Adjust width for mobile devices */
+            }
+
+            /* Additional mobile-specific styles can be included here */
+        }
+
     </style>
 </head>
 <body>
@@ -134,9 +145,8 @@
     </div>
 
     <!-- The map button -->
-    <a href="https://onlyfans.com/gdawg_24" target="_blank">
-        <button class="map-button">Hot content coming soon 😩
-        </button>
+    <a href="https://www.youtube.com/watch?v=LUrawkJf_MI" target="_blank">
+        <button class="map-button">Click Me</button>
     </a>
 
     <!-- Theme toggle button -->
@@ -155,30 +165,24 @@
             slides.style.transform = `translateX(-${currentIndex * 300}px)`;
         }
 
-        setInterval(slideImages, 7000);  // Change the image every 7 seconds
+        setInterval(slideImages, 7000); // Change the image every 7 seconds
 
         function toggleSummary() {
             let summaryContent = document.querySelector('.summary-content');
             summaryContent.style.display = summaryContent.style.display === "none" ? "block" : "none";
         }
 
-        // JavaScript for theme switching with a check for text color
         function toggleTheme() {
             let body = document.body;
             let themeIcon = document.getElementById('theme-icon');
-            let summaryContent = document.querySelector('.summary-content');
 
             body.classList.toggle('dark-mode');
             if (body.classList.contains('dark-mode')) {
                 themeIcon.src = 'moon-toggle-icon.png'; // Dark mode icon
                 themeIcon.alt = 'Dark Mode';
-                summaryContent.style.backgroundColor = '#333'; // Dark mode summary background
-                summaryContent.style.color = '#f5f5f5'; // Dark mode summary text
             } else {
                 themeIcon.src = 'sun-toggle-icon.png'; // Light mode icon
                 themeIcon.alt = 'Light Mode';
-                summaryContent.style.backgroundColor = '#f5f5f5'; // Light mode summary background
-                summaryContent.style.color = '#000'; // Light mode summary text
             }
         }
     </script>
