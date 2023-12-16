@@ -1,29 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gavin Cutshaw ❤️</title>
+    <title>Gavin Nutshaw Inc.</title>
     <style>
+        :root {
+            --primary-color: #333;
+            --background-color: #f5f5f5;
+            --text-color: #000;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+        }
+
+        [data-theme="dark"] {
+            --primary-color: #222;
+            --background-color: #121212;
+            --text-color: #fff;
+            --shadow-color: rgba(255, 255, 255, 0.1);
+        }
+
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            background-color: #f5f5f5;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
             flex-direction: column;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .top-right-logo {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-image: url('gavintsb.png'); /* Using one of the images you provided as the logo */
+            background-size: cover;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .top-right-logo:hover::after {
+            content: 'Gavin Nutshaw Inc.';
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            padding: 5px;
+            border-radius: 5px;
+            font-size: 14px;
+            white-space: nowrap;
         }
 
         .love-text {
-            text-align: center;
             font-size: 24px;
-            background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+            background: linear-gradient(to left, violet, indigo, blue, green, yellow, orange, red);
             -webkit-background-clip: text;
-            background-clip: text;
             color: transparent;
+            user-select: none;
             margin-bottom: 20px;
         }
 
@@ -32,7 +72,7 @@
             width: 300px; 
             height: 300px; 
             overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 8px var(--shadow-color);
         }
 
         .slides {
@@ -48,8 +88,9 @@
 
         .summary-content {
             display: none;
-            background-color: white;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: var(--background-color);
+            color: var(--text-color);
+            box-shadow: 0 4px 8px var(--shadow-color);
             padding: 10px;
             width: 300px;
             margin-top: 10px;
@@ -69,10 +110,56 @@
         .summary-button:hover, .map-button:hover {
             background-color: #0056b3;
         }
+
+        .toggle-mode {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            cursor: pointer;
+        }
+
+        .modal {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px var(--shadow-color);
+            z-index: 10;
+        }
+
+        .modal input {
+            display: block;
+            margin-bottom: 10px;
+            padding: 10px;
+            width: calc(100% - 20px);
+            box-sizing: border-box;
+        }
+
+        .modal button {
+            padding: 10px 15px;
+            background-color: #007BFF;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .modal-close {
+            float: right;
+            cursor: pointer;
+        }
     </style>
 </head>
+<body data-theme="light">
 
-<body>
+    <div class="top-right-logo" onclick="toggleModal('login-modal')"></div>
+
+    <div class="toggle-mode" onclick="toggleMode()">Toggle Mode</div>
 
     <!-- The love declaration text -->
     <div class="love-text">
@@ -93,26 +180,45 @@
     <!-- Summary button and content -->
     <button class="summary-button" onclick="toggleSummary()">Summary</button>
     <div class="summary-content">
-        In a heartbreaking turn of events, Gavin Cutshaw, a brilliantly talented 17-year-old rapper, tragically passed away. Known for his profound lyrical abilities and unique sound, Gavin touched the hearts of many, demonstrating that age is just a number when it comes to artistic depth. While his rapping skills earned him respect from music enthusiasts, it also made him a target for bullying, revealing the cruel paradox of society where exceptional talent can sometimes attract envy and hatred.
-
-        In addition to his music, Gavin was also a beloved figure on YouTube, where he showcased his humorous side. Through his videos, he managed to bring laughter and light to hundreds, if not thousands, of his subscribers. His infectious energy and quirky sense of humor was a testament to his ability to switch between the seriousness of his music and the joy of his comedic content.
-
-        However, behind the screens and stages, the weight of bullying bore heavily on his young soul. Despite the smiles, laughter, and beats he shared with the world, Gavin struggled in silence. In a devastating decision, he took his own life, a painful reminder of the unseen scars that many endure. Gavin's untimely passing serves as a stark wake-up call about the profound impacts of bullying and the importance of support and understanding in our communities. The world has lost a bright star, but his legacy will continue to shine in the music he left behind and the smiles he once evoked.
+        <!-- Your summary content here -->
     </div>
 
     <!-- The map button -->
-    <a href="https://www.pornhub.com/gayporn" target="_blank">
+    <a href="https://www.youtube.com/watch?v=LUrawkJf_MI" target="_blank">
         <button class="map-button">Click Me</button>
     </a>
 
-    <!-- JavaScript for the slider, summary, and audio functionality -->
+    <!-- Login modal -->
+    <div id="login-modal" class="modal">
+        <span class="modal-close" onclick="toggleModal('login-modal')">&times;</span>
+        <h2>Login</h2>
+        <input type="text" placeholder="Email">
+        <input type="password" placeholder="Password">
+        <button onclick="login()">Login</button>
+        <p>Don't have an account? <span onclick="toggleModals()">Sign Up</span></p>
+    </div>
+
+    <!-- Sign up modal -->
+    <div id="signup-modal" class="modal">
+        <span class="modal-close" onclick="toggleModal('signup-modal')">&times;</span>
+        <h2>Sign Up</h2>
+        <input type="text" placeholder="Full Name">
+        <input type="text" placeholder="Email">
+        <input type="password" placeholder="Password">
+        <button onclick="signUp()">Sign Up</button>
+    </div>
+
     <script>
-        let slides = document.querySelector('.slides');
-        let imgCount = slides.children.length;
-        let currentIndex = 0;
-        
+        function toggleMode() {
+            let body = document.body;
+            let theme = body.getAttribute('data-theme');
+            body.setAttribute('data-theme', theme === 'dark' ? 'light' : 'dark');
+        }
+
         function slideImages() {
-            currentIndex = (currentIndex + 1) % imgCount;
+            let slides = document.querySelector('.slides');
+            let imgCount = slides.children.length;
+            let currentIndex = (currentIndex + 1) % imgCount;
             slides.style.transform = `translateX(-${currentIndex * 300}px)`;
         }
 
@@ -126,8 +232,24 @@
                 summaryContent.style.display = "none";
             }
         }
+
+        function toggleModal(modalId) {
+            let modal = document.getElementById(modalId);
+            modal.style.display = modal.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function toggleModals() {
+            toggleModal('login-modal');
+            toggleModal('signup-modal');
+        }
+
+        function login() {
+            // Implement your login logic here
+        }
+
+        function signUp() {
+            // Implement your sign-up logic here
+        }
     </script>
-
 </body>
-
 </html>
