@@ -8,9 +8,9 @@
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            transition: background-color 0.3s; /* Smooth transition for background color */
-            background-color: #f5f5f5; /* Default light background */
-            color: #000; /* Default text color for light mode */
+            transition: background-color 0.3s, color 0.3s; /* Smooth transitions for background and text color */
+            background-color: #f5f5f5; /* Light mode background */
+            color: #000; /* Light mode text color */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -49,13 +49,14 @@
 
         .summary-content {
             display: none;
-            background-color: #333; /* Dark background for the summary */
-            color: #f5f5f5; /* Light text for readability */
+            background-color: #f5f5f5; /* Light mode background */
+            color: #000; /* Light mode text color */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             padding: 10px;
             width: 300px;
             margin-top: 10px;
             border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s; /* Smooth transitions for background and text color */
         }
 
         .summary-button, .map-button {
@@ -90,17 +91,17 @@
 
         /* Dark mode styles */
         .dark-mode {
-            background-color: #333; /* Dark background for the body */
-            color: #f5f5f5; /* Light text for readability */
+            background-color: #333; /* Dark mode background */
+            color: #f5f5f5; /* Dark mode text color */
         }
 
         .dark-mode .theme-toggle img {
-            filter: invert(1); /* Invert colors for the toggle icon */
+            filter: invert(1); /* Invert colors for the toggle icon in dark mode */
         }
 
         .dark-mode .summary-content {
-            background-color: #333; /* Match the body's dark mode background */
-            color: #f5f5f5; /* Match the body's dark mode text color */
+            background-color: #333; /* Dark mode summary background */
+            color: #f5f5f5; /* Dark mode summary text color */
         }
     </style>
 </head>
@@ -118,7 +119,7 @@
             <img src="gavintsb2.jpg" alt="Placeholder Image 2">
             <img src="gavintsb3.jpg" alt="Placeholder Image 3">
             <img src="gavintsb3.png" alt="Placeholder Image 4">
-            <img src="gavintsb4.png" alt="Placeholder Image 5">            
+            <img src="gavintsb4.png" alt="Placeholder Image 5">
         </div>
     </div>
 
@@ -160,18 +161,23 @@
             summaryContent.style.display = summaryContent.style.display === "none" ? "block" : "none";
         }
 
-        // JavaScript for theme switching
+        // JavaScript for theme switching with a check for text color
         function toggleTheme() {
             let body = document.body;
             let themeIcon = document.getElementById('theme-icon');
+            let summaryContent = document.querySelector('.summary-content');
 
             body.classList.toggle('dark-mode');
             if (body.classList.contains('dark-mode')) {
-                themeIcon.src = 'moon-toggle-icon.png';  // Change to dark mode icon
+                themeIcon.src = 'moon-toggle-icon.png'; // Dark mode icon
                 themeIcon.alt = 'Dark Mode';
+                summaryContent.style.backgroundColor = '#333'; // Dark mode summary background
+                summaryContent.style.color = '#f5f5f5'; // Dark mode summary text
             } else {
-                themeIcon.src = 'sun-toggle-icon.png';  // Change to light mode icon
+                themeIcon.src = 'sun-toggle-icon.png'; // Light mode icon
                 themeIcon.alt = 'Light Mode';
+                summaryContent.style.backgroundColor = '#f5f5f5'; // Light mode summary background
+                summaryContent.style.color = '#000'; // Light mode summary text
             }
         }
     </script>
