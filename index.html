@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -69,9 +68,29 @@
         .summary-button:hover, .map-button:hover {
             background-color: #0056b3;
         }
+
+        /* Added styles for theme switching */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .theme-toggle img {
+            width: 30px;
+            height: 30px;
+        }
+
+        /* Dark mode styles */
+        .dark-mode {
+            background-color: #333;
+            color: #f5f5f5;
+        }
     </style>
 </head>
-
 <body>
 
     <!-- The love declaration text -->
@@ -105,6 +124,11 @@
         <button class="map-button">Click Me</button>
     </a>
 
+    <!-- Theme toggle button -->
+    <button class="theme-toggle" onclick="toggleTheme()">
+        <img src="sun-toggle-icon.png" alt="Light Mode" id="theme-icon">
+    </button>
+
     <!-- JavaScript for the slider, summary, and audio functionality -->
     <script>
         let slides = document.querySelector('.slides');
@@ -126,8 +150,22 @@
                 summaryContent.style.display = "none";
             }
         }
+
+        // JavaScript for theme switching
+        function toggleTheme() {
+            let body = document.body;
+            let themeIcon = document.getElementById('theme-icon');
+
+            body.classList.toggle('dark-mode');
+            if (body.classList.contains('dark-mode')) {
+                themeIcon.src = 'moon-toggle-icon.png';  // Change to dark mode icon
+                themeIcon.alt = 'Dark Mode';
+            } else {
+                themeIcon.src = 'sun-toggle-icon.png';  // Change to light mode icon
+                themeIcon.alt = 'Light Mode';
+            }
+        }
     </script>
 
 </body>
-
 </html>
